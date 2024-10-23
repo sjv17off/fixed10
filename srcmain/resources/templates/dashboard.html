@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Tasko - Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="#" class="flex items-center py-4 px-2">
+                            <span class="font-semibold text-gray-500 text-lg">Tasko</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="/tasks" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-blue-500 hover:text-white transition duration-300">Tasks</a>
+                    <a href="/attendance/log" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-blue-500 hover:text-white transition duration-300">Log Attendance</a>
+                    <a sec:authorize="hasRole('ADMIN')" href="/enterprises" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-blue-500 hover:text-white transition duration-300">Enterprises</a>
+                    <a href="/logout" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-blue-500 hover:text-white transition duration-300">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <p class="text-xl text-gray-700">Welcome, <span sec:authentication="name"></span>!</p>
+            <p class="mt-4 text-gray-600">Your role: <span sec:authentication="principal.authorities"></span></p>
+        </div>
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="/tasks" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded transition duration-300 text-center">
+                    View Tasks
+                </a>
+                <a href="/tasks/create" class="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-6 rounded transition duration-300 text-center">
+                    Create New Task
+                </a>
+                <a href="/attendance/log" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-4 px-6 rounded transition duration-300 text-center">
+                    Log Attendance
+                </a>
+                <a sec:authorize="hasRole('ADMIN')" href="/enterprises" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-4 px-6 rounded transition duration-300 text-center">
+                    Manage Enterprises
+                </a>
+                <a sec:authorize="hasRole('ADMIN')" href="/users" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded transition duration-300 text-center">
+                    Manage Users
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

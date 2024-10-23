@@ -1,0 +1,171 @@
+Tasko - Task and Attendance Management System
+
+1. Project Structure:
+   - Spring Boot application
+   - Maven project
+   - Java version: 11
+   - Main class: TaskoApplication.java
+   - Cross-platform desktop launcher application
+   - User-friendly UI with consistent theme
+   - Responsive design for all devices
+
+2. Dependencies:
+   - spring-boot-starter-data-jpa
+   - spring-boot-starter-security
+   - spring-boot-starter-thymeleaf
+   - spring-boot-starter-web
+   - thymeleaf-extras-springsecurity5
+   - h2 (runtime)
+   - spring-boot-starter-test (test)
+   - spring-security-test (test)
+   - javafx (for desktop launcher)
+   - fullcalendar (for attendance calendar)
+
+3. Color Palette:
+   - Primary: #3A86FF (Vibrant Blue)
+   - Secondary: #FF006E (Bright Pink)
+   - Accent: #FFBE0B (Warm Yellow)
+   - Background: linear-gradient(135deg, #f6f8fb 0%, #e5ebf4 100%)
+   - Text: #212529 (Dark Gray)
+   - Success: #8AC926 (Lime Green)
+   - Error: #FF595E (Coral Red)
+
+4. Design and Animations:
+   - Modern, clean interface using Tailwind CSS
+   - Responsive design for various screen sizes
+   - Subtle hover effects on buttons and links
+   - Gradient backgrounds for visual appeal
+   - Consistent theme across all pages
+   - Password visibility toggle
+   - Calendar view for attendance
+   - Hoverable sidebar navigation
+   - User-friendly desktop launcher UI
+
+5. Typography:
+   - Font family: Inter or Roboto (sans-serif)
+   - Headings: Bold, color #212529
+   - Body text: Regular, color #495057
+
+6. Features Implemented:
+   - User authentication (login, logout, registration)
+   - Role-based access control (USER, ADMIN roles)
+   - Separate dashboards for admin and user roles
+   - Task management (create, read, update, delete)
+   - Attendance logging system with calendar view
+   - Payroll management for admins
+   - Enterprise management
+   - H2 in-memory database for data storage
+   - Form validation
+   - Pagination for lists
+   - User profile page
+   - Cross-platform desktop launcher
+   - Password visibility toggle
+   - Daily attendance logging
+   - Calendar view for attendance tracking
+   - Payroll calculation and management
+   - Enterprise-specific views and management
+
+7. Role-specific Features:
+   Admin Dashboard:
+   - CRUD operations for tasks
+   - CRUD operations for attendance
+   - Payroll management
+   - Enterprise management
+   - Calendar view of all user attendance
+   - User management
+   - Reports and analytics
+
+   User Dashboard:
+   - View assigned tasks
+   - Log task completion
+   - Daily attendance logging
+   - View attendance history
+   - View payroll information
+   - Profile management
+
+8. Desktop Launcher Features:
+   - Cross-platform compatibility (Windows/Linux)
+   - Server management UI
+   - One-click start/stop
+   - Error logging and display
+   - Status monitoring
+   - Configuration management
+   - Auto-update capability
+   - System tray integration
+
+9. Project Files:
+   - Java classes (Controllers, Models, Services, Repositories)
+   - HTML templates with consistent styling
+   - Desktop launcher application
+   - Configuration files
+   - Database scripts
+
+10. Security Features:
+    - Role-based access control
+    - Password encryption
+    - Session management
+    - CSRF protection
+    - XSS prevention
+    - Input validation
+
+11. Database Structure:
+    - Users table with role management
+    - Tasks with assignments
+    - Attendance records
+    - Payroll information
+    - Enterprise management
+    - Audit logging
+
+12. Deployment:
+    - Executable JAR file
+    - Desktop launcher application
+    - Database initialization scripts
+    - Configuration profiles
+
+13. Next Steps:
+    - Implement email notifications
+    - Add export functionality for reports
+    - Enhance mobile responsiveness
+    - Add more analytics features
+    - Implement backup/restore functionality
+    - Add multi-language support
+    - Add dark mode support
+    - Implement real-time notifications
+    - Add task comments and attachments
+    - Enhance payroll calculations
+    - Add leave management system
+    - Implement team management
+    - Add project timelines
+    - Enhance reporting features
+    - Add document management
+    - Implement chat functionality
+    - Add mobile app support
+    - Enhance security features
+    - Add API documentation
+    - Implement CI/CD pipeline
+
+14. Known Issues:
+    - Need to enhance error handling
+    - Optimize database queries
+    - Improve load times for calendar view
+    - Add more comprehensive logging
+
+15. Recent Updates:
+    - Added separate admin/user dashboards
+    - Implemented payroll management
+    - Added calendar view for attendance
+    - Created desktop launcher application
+    - Enhanced UI consistency
+    - Added password visibility toggle
+    - Improved enterprise management
+    - Streamlined attendance logging
+    - Added cross-platform support
+    - Enhanced dashboard with hoverable sidebar
+    - Improved user experience
+    - Added practical attendance logging
+    - Enhanced payroll management
+    - Simplified role management
+    - Updated UI theme consistency
+    - Added desktop launcher UI
+    - Enhanced entity relationships
+    - Improved cross-platform support

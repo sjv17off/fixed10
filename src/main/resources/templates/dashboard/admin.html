@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Tasko - Admin Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-indigo-50">
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg transition-transform duration-300 transform -translate-x-full lg:translate-x-0" 
+             id="sidebar">
+            <div class="flex flex-col h-full">
+                <div class="p-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+                    <h2 class="text-xl font-bold">Tasko Admin</h2>
+                    <p class="text-sm mt-1" th:text="${enterprise.name}"></p>
+                    <p class="text-sm">Role: Administrator</p>
+                </div>
+                <nav class="flex-1 p-4 space-y-2">
+                    <a href="/tasks" class="block p-3 rounded hover:bg-blue-50 transition-colors">
+                        <span class="text-gray-700">Task Management</span>
+                    </a>
+                    <a href="/attendance/calendar" class="block p-3 rounded hover:bg-blue-50 transition-colors">
+                        <span class="text-gray-700">Attendance Calendar</span>
+                    </a>
+                    <a href="/payroll/manage" class="block p-3 rounded hover:bg-blue-50 transition-colors">
+                        <span class="text-gray-700">Payroll Management</span>
+                    </a>
+                    <a href="/enterprises" class="block p-3 rounded hover:bg-blue-50 transition-colors">
+                        <span class="text-gray-700">Enterprise Management</span>
+                    </a>
+                    <a href="/users" class="block p-3 rounded hover:bg-blue-50 transition-colors">
+                        <span class="text-gray-700">User Management</span>
+                    </a>
+                    <a href="/reports" class="block p-3 rounded hover:bg-blue-50 transition-colors">
+                        <span class="text-gray-700">Reports & Analytics</span>
+                    </a>
+                </nav>
+                <div class="p-4 border-t">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="w-full p-3 text-left text-red-600 hover:bg-red-50 rounded transition-colors">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 lg:ml-64">
+            <!-- Top Navigation -->
+            <nav class="bg-white shadow-lg p-4">
+                <div class="flex justify-between items-center">
+                    <button class="lg:hidden" onclick="toggleSidebar()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-4">
+                        <a href="/profile" class="text-gray-600 hover:text-blue-600">Profile</a>
+                        <span class="text-gray-600" th:text="${#authentication.name}"></span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Dashboard Content -->
+            <div class="p-6">
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Total Users</h3>
+                        <p class="text-3xl font-bold text-blue-600" th:text="${userCount}">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Active Tasks</h3>
+                        <p class="text-3xl font-bold text-green-600" th:text="${activeTaskCount}">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Today's Attendance</h3>
+                        <p class="text-3xl font-bold text-purple-600" th:text="${todayAttendanceCount}">0</p>
+                    </div>
+                </div>
+
+                <!-- Attendance Calendar -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Attendance Calendar</h2>
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // Calendar Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: '/attendance/events',
+                eventClick: function(info) {
+                    alert('User: ' + info.event.title + '\nStatus: ' + info.event.extendedProps.status);
+                }
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html>

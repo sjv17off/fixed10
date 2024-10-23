@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tasko - Create Task</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Create New Task</h1>
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form th:action="@{/tasks/create}" th:object="${task}" method="post">
+                <div class="mb-4">
+                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
+                    <input type="text" id="title" name="title" th:field="*{title}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-red-500 text-xs italic"></span>
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                    <textarea id="description" name="description" th:field="*{description}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-500 text-xs italic"></span>
+                </div>
+                <div class="mb-4">
+                    <label for="dueDate" class="block text-gray-700 text-sm font-bold mb-2">Due Date</label>
+                    <input type="datetime-local" id="dueDate" name="dueDate" th:field="*{dueDate}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <span th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}" class="text-red-500 text-xs italic"></span>
+                </div>
+                <div class="mb-4">
+                    <label for="assignedUsers" class="block text-gray-700 text-sm font-bold mb-2">Assign Users</label>
+                    <select id="assignedUsers" name="assignedUsers" multiple class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Create Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
